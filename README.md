@@ -1,6 +1,12 @@
 # ToTheMoon.API
 Crypto Price Alert Web Application's Core Backend, developed as a recruitment task for Krypto 
 
+### Tech Stack:
+The backend is written in Python with Flask for the web application framework, SQLite for the Database Engine, SQLAlchemy as the Object Relational Mapper and Postman is used for API testing.
+
+### Description:
+This backend works in two 'modes', 'config' by default and 'activated' via the /emailmode endpoint. Config mode has 3 API endpoints, creating an alert, deleting an alert and fetching all alerts by user which can be filtered by status and such. After some frontend magic, this can be used in building a web app to send you E-Mail alerts as the real time price index of BTC-USD reaches your preferred target using GMail SMTP.
+
 ### Installation:
 1. Pull this repository and extract the lib.rar file inside the venv directory
 2. rename the venv directory into .venv (Hidden Folder)
@@ -16,3 +22,32 @@ or equivalent commands as per operating system
 #### If everything goes well, the backend should be up and running on your localhost at port 5000
 
 The homepage at localhost:5000/ shows the current price of bitcoin as retreived from CoinGecko's API 
+
+## Documentation:
+
+### API Endpoints:
+
+##### There are 4 Endpoints in total, 3 for the Alerts and 1 to switch to activated mode, which continues to run and update the user.
+
+#### /alerts/create - POST Requests
+
+Usage: Create an alert for a particular user to get email alerts when the price of BTC crosses a particular target.
+
+parameters: u_id - user id, a_id - alert id, a_target - target price
+
+Status is set to created when an alert is made using the POST call
+
+#### /alerts/delete - PUT Requests
+
+Usage: Delete an alert based on alert id, status is changed to deleted and the alert is not sent if it was not triggered before deletion, record is preserved in the database.
+
+parameters: a_id - alert id
+
+#### /alerts - GET Requests
+
+Usage: Fetch all alerts made for a particular user, filter by user id and query filter for the alert status.
+
+parameters: u_id - user id, queryfilter - status of the alert, can be one of ['created','deleted','triggered']
+
+
+
