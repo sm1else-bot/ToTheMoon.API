@@ -4,8 +4,10 @@ Crypto Price Alert Web Application's Core Backend, developed as a recruitment ta
 ### Tech Stack:
 The backend is written in Python with Flask for the web application framework, SQLite for the Database Engine, SQLAlchemy as the Object Relational Mapper and Postman is used for API testing.
 
+The web app is also configured for dockerization and an image can be built by running 'docker build -t ToTheMoonAPI:latest .'
+
 ### Description:
-This backend works in two 'modes', 'config' by default and 'activated' via the /emailmode endpoint. Config mode has 3 API endpoints, creating an alert, deleting an alert and fetching all alerts by user which can be filtered by status and such. After some frontend magic, this can be used in building a web app to send you E-Mail alerts as the real time price index of BTC-USD reaches your preferred target using GMail SMTP.
+This backend works in two 'modes', 'config' by default and 'activated' via the /emailmode endpoint. Config mode has 3 API endpoints, creating an alert, deleting an alert and fetching all alerts by user which can be filtered by status and such. After some frontend magic, this can be used in building a web app to send you E-Mail alerts as the real time price index of BTC-USD reaches your preferred target using GMail SMTP. The Authentication is done with SHA-256 Encryption using JWT access tokens that are valid for 60 minutes post generation
 
 ### Installation:
 1. Pull this repository and extract the lib.rar file inside the venv directory
@@ -54,6 +56,8 @@ parameters: u_id - user id, queryfilter - status of the alert, can be one of ['c
 Unlike the other 3 endpoints where we have a raw json in the request body with the required parameters, this serves as a toggle for the 'activated' mode that will start checking and updating bitcoin_rate in real time in accordance with Coinbase's API (switched from CoinGecko for a better functional API response that's easier to format and compare) and while it looks like it's loading forever in the browser at this API path, it just means that its functional and sending e-mails via hardcoded gmail SMTP credentials.
 
 The console will also output the current value of Bitcoin every 5 minutes, with some modifications this can be returned from the client side as well, but that's for the frontend guys to play around with, right?
+
+###Endpoints that are related to CRUD operations will require access tokens to execute, which are valid for 60 minutes post generation during login.
 
 
 
