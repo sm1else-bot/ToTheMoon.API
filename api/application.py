@@ -4,9 +4,9 @@ import time
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import smtplib
-import getpass
+#import getpass
 import requests
-import json
+#import json
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -67,7 +67,7 @@ def remove_alert():
     db.session.commit()
     return "Deleted Successfully"
 
-def send_email():
+def send_email(send_email_to,your_name):
     msg = MIMEMultipart()
     password = your_password
     msg['From'] = your_email
@@ -101,12 +101,14 @@ def theInfiniteLoop():
         bpi=data['bpi']
         USD=bpi['USD']
         bitcoin_rate=int(USD['rate_float'])
-        targetList = Alert.query.filter(Alert.a_target <= bitcoin_rate).all()
+        targetList = Alert.query.filter(Alert.a_target <= bitcoin_rate).filter(Alert.a_status == 'created').all()
         for targetRow in targetList:
             userRow = User.query.filter_by(u_id=targetRow.u_id).first()
             send_email_to=userRow.u_email
             your_name=userRow.u_name
-            send_email()
+            send_email(send_email_to,your_name)
+            targetRow.a_status = 'triggered'
+            db.session.commit()
             print("Ctrl + C to quit, will check again in 5 minutes.")        
         
         print('Price is ' + str(bitcoin_rate) + '. Will check again in 5 minutes. Ctrl + C to exit.')
