@@ -57,7 +57,13 @@ Unlike the other 3 endpoints where we have a raw json in the request body with t
 
 The console will also output the current value of Bitcoin every 5 minutes, with some modifications this can be returned from the client side as well, but that's for the frontend guys to play around with, right?
 
-###Endpoints that are related to CRUD operations will require access tokens to execute, which are valid for 60 minutes post generation during login.
+### Endpoints that are related to CRUD operations will require access tokens to execute, which are valid for 60 minutes post generation during login.
+
+## About the Developer:
+
+Name: Jessenth Ebenezer S
+Registration No: 19BCE1462
+
 
 
 
