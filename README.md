@@ -49,5 +49,15 @@ Usage: Fetch all alerts made for a particular user, filter by user id and query 
 
 parameters: u_id - user id, queryfilter - status of the alert, can be one of ['created','deleted','triggered']
 
+#### /emailmode - GET Requests
+
+Unlike the other 3 endpoints where we have a raw json in the request body with the required parameters, this serves as a toggle for the 'activated' mode that will start checking and updating bitcoin_rate in real time in accordance with Coinbase's API (switched from CoinGecko for a better functional API response that's easier to format and compare) and while it looks like it's loading forever in the browser at this API path, it just means that its functional and sending e-mails via hardcoded gmail SMTP credentials.
+
+The console will also output the current value of Bitcoin every 5 minutes, with some modifications this can be returned from the client side as well, but that's for the frontend guys to play around with, right?
+
+
+
+
+
 
 
