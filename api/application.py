@@ -37,7 +37,7 @@ def index():
     for coins in response.json():
         if(coins["symbol"]=="btc"):
             cp = str(coins["current_price"])
-            return cp + 'is the price right now!'
+            return cp + ' is the price of $BTC right now!'
 
 @app.route('/alerts',methods=['GET'])
 def view_alerts():
